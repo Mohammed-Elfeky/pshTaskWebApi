@@ -1,13 +1,13 @@
 ﻿using pshTaskWebApi.Models;
 using System.Collections.Generic;
-
+using pshTaskWebApi.DTOS;
 namespace pshTaskWebApi.Repos
 {
     public interface IEmployeeRepo
     {
-        Employee add(Employee employee);
+        int add(Employee employee);
         int Delete(int id);
-        Employee Edit(int id, Employee employee);
+        int Edit(int id, Employee employee);
         bool FindByFirstName(string name);
         Employee FindById(int id);
         List<Employee> GetAll();

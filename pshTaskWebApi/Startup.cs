@@ -12,7 +12,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using pshTaskWebApi.Models;
 using Microsoft.EntityFrameworkCore;
-
+using pshTaskWebApi.Repos;
 namespace pshTaskWebApi
 {
     public class Startup
@@ -30,12 +30,20 @@ namespace pshTaskWebApi
             services.AddDbContext<context>(optios => {
                 optios.UseSqlServer(Configuration.GetConnectionString("cs"));
             });
-
+            services.AddScoped<IEmployeeRepo, EmployeeRepo>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "pshTaskWebApi", Version = "v1" });
             });
+
+            services.AddCors(corsOptions => {
+                corsOptions.AddPolicy("policy", corsPolicyBuilder =>
+                {
+                    corsPolicyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                });
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +55,7 @@ namespace pshTaskWebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "pshTaskWebApi v1"));
             }
-
+            app.UseCors("policy");
             app.UseRouting();
 
             app.UseAuthorization();

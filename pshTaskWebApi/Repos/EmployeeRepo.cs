@@ -1,7 +1,8 @@
-﻿using pshTaskWebApi.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using pshTaskWebApi.Models;
 using System.Collections.Generic;
 using System.Linq;
-
+using pshTaskWebApi.DTOS;
 namespace pshTaskWebApi.Repos
 {
     public class EmployeeRepo : IEmployeeRepo
@@ -14,19 +15,20 @@ namespace pshTaskWebApi.Repos
         }
         public List<Employee> GetAll()
         {
-            return context.employees.ToList();
+            var employess= context.employees.Include(e => e.department).ToList();
+            return employess;
         }
         public Employee FindById(int id)
         {
-            return context.employees.Where(p => p.Id == id).SingleOrDefault();
+            return context.employees.Include(e => e.department).Where(p => p.Id == id).SingleOrDefault();
         }
-        public Employee add(Employee employee)
+        public int add(Employee employee)
         {
             context.employees.Add(employee);
             context.SaveChanges();
-            return employee;
+            return employee.Id;
         }
-        public Employee Edit(int id, Employee employee)
+        public int Edit(int id, Employee employee)
         {
             Employee oldEmployee = FindById(id);
             if (oldEmployee != null)
@@ -36,10 +38,9 @@ namespace pshTaskWebApi.Repos
                 oldEmployee.BirthDate = employee.BirthDate;
                 oldEmployee.Phone = employee.Phone;
                 oldEmployee.dept_id = employee.dept_id;
-                context.SaveChanges();
-                return oldEmployee;
+                return context.SaveChanges();
             }
-            return null;
+            return -1;
         }
         public int Delete(int id)
         {

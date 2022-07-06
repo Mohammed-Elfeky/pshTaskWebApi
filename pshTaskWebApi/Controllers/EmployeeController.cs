@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using pshTaskWebApi.Models;
 using pshTaskWebApi.Repos;
+using pshTaskWebApi.DTOS;
+using System.Linq;
 namespace pshTaskWebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -21,7 +23,8 @@ namespace pshTaskWebApi.Controllers
         {
             try
             {
-                return Ok(employeeRepo.GetAll());
+                var empolyees = employeeRepo.GetAll().Select(emp => converter(emp));
+                return Ok(empolyees);
             }
             catch
             {
@@ -40,7 +43,7 @@ namespace pshTaskWebApi.Controllers
                 {
                     return Problem("the id doesn't exist");
                 }
-                return Ok(employee);
+                return Ok(converter(employee));
             }
             catch
             {
@@ -53,9 +56,9 @@ namespace pshTaskWebApi.Controllers
         {
             try
             {
-                Employee employee1  = employeeRepo.add(employee);
-                return Ok(employee1);
-            }
+                int empId  = employeeRepo.add(employee);
+                return Ok(new {id=empId});
+        }
             catch
             {
                 return Problem("something went wrong");
@@ -77,7 +80,7 @@ namespace pshTaskWebApi.Controllers
         }
 
         [HttpDelete("{id:int}")]
-        public IActionResult deletecat(int id)
+        public IActionResult deleteEmp(int id)
         {
             try
             {
@@ -91,6 +94,20 @@ namespace pshTaskWebApi.Controllers
             {
                 return Problem("something went wrong");
             }
+        }
+
+        ReturnEmployeeDTO converter(Employee e)
+        {
+            return new ReturnEmployeeDTO()
+            {
+                Id = e.Id,
+                firstName = e.firstName,
+                lastName = e.lastName,
+                Phone = e.Phone,
+                BirthDate = e.BirthDate,
+                Image = e.Image,
+                departmentName = e.department.Name
+            };
         }
     }
 }
