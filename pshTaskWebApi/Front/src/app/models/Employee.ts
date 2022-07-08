@@ -8,12 +8,13 @@ export interface EmployeePost {
 }
 
 export interface Employee {
-    Id: number,
+    id: number,
     firstName: string,
     lastName: string,
-    Phone: string,
-    BirthDate: Date,
+    phone: string,
+    birthDate: Date,
     Image: string,
-    departmentName: string
+    departmentName: string,
+    dept_Id:number
 }
 

@@ -31,6 +31,7 @@ namespace pshTaskWebApi
                 optios.UseSqlServer(Configuration.GetConnectionString("cs"));
             });
             services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            services.AddScoped<IDepartmentRepo, DepartmentRepo>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

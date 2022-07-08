@@ -12,5 +12,7 @@ namespace pshTaskWebApi.DTOS
         public DateTime BirthDate { get; set; }
         public string Image { get; set; }
         public string departmentName { get; set; }
+        public int dept_Id { get; set; }
+
     }
 }

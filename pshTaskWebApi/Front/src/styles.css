@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+/* @import url("../FormStyles/material-design-iconic-font.min.css"); */
+/* @import url("../FormStyles/font-awesome.min.css");
+@import url("../FormStyles/select2.min.css");
+@import url("../FormStyles/daterangepicker.css");
+@import url("../FormStyles/main.css"); */
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

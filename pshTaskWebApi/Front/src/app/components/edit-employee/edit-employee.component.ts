@@ -16,22 +16,6 @@ export class EditEmployeeComponent implements OnInit {
     console.log("ngOnInit")
     this.route.params.subscribe(params => {
       this.empId = params["id"];
-
-      // this.empService.getEmployee(this.empId).subscribe(data=>{console.log(data)},
-      // err=>{console.log(err.status)}
-      // )
-
-      // this.empService.editEmployee({
-      //   firstName: "wwwwwwwwwwwwedit",
-      //   lastName: "wwwwwwwwwwwedit",
-      //   Phone: "76986986",
-      //   BirthDate: new Date(),
-      //   Image: "lkjlj",
-      //   dept_id: 3
-      // }, 5).subscribe(data=>{
-      //   console.log(data)
-      // })
-
       this.empService.deleteEmployee(5).subscribe(data=>{
         console.log(data)
       })

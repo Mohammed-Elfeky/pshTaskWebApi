@@ -1,28 +1,61 @@
-<p>add-employee works!</p>
-<form>
-    <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-    </div>
-    <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
-    </div>
-    <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-    </div>
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-    </select>
-    <div>
-        <label for="birthday">Birthday:</label>
-        <input type="date" id="birthday" name="birthday">
-    </div>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+
+<form [formGroup]="profileForm" (ngSubmit)="whenSubmit()" class="w-25 mt-5 mx-auto">
+    <div class="container">
+
+        <!-- first name -->
+        <div class="input-group mb-3">
+            <input [ngClass]="{invalidInput :thisInputIsNotValidAndFormSubmitted('firstName')}" type="text"
+                class="form-control" placeholder="First Name" aria-label="Username" aria-describedby="basic-addon1"
+                formControlName="firstName">
+        </div>
+        <div>
+            <small class="error-style" *ngIf="thisInputIsNotValidAndFormSubmitted('firstName')">
+                the name is required and must be 3 chars or more
+            </small>
+        </div>
+
+        <!-- last name -->
+        <div class="input-group mb-3">
+            <input [ngClass]="{invalidInput :thisInputIsNotValidAndFormSubmitted('lastName')}" type="text" class="form-control" placeholder="Last Name" aria-label="Username"
+                aria-describedby="basic-addon1" formControlName="lastName">
+        </div>
+        <div>
+            <small class="error-style" *ngIf="thisInputIsNotValidAndFormSubmitted('lastName')">
+                enter a valid name
+            </small>
+        </div>
+
+        <!-- Phone -->
+        <div class="input-group mb-3">
+            <input [ngClass]="{invalidInput :thisInputIsNotValidAndFormSubmitted('Phone')}" type="text" class="form-control" placeholder="Phone" aria-label="Username"
+                aria-describedby="basic-addon1" formControlName="Phone">
+        </div>
+        <div>
+            <small class="error-style" *ngIf="thisInputIsNotValidAndFormSubmitted('Phone')">
+                enter a valid Phone
+            </small>
+        </div>
+
+        <!-- department -->
+        <div class="mb-2" >
+            <select (change)="whenChange($event)" class="form-select" aria-label="Default select example" formControlName="dept_id">
+                <option *ngFor="let Department of deparments ; let i = index"  [value]="Department.id">{{Department.name}}</option>
+            </select>
+        </div>
+
+        
+        <!-- birth day -->
+        <div >
+            <label for="birthday">Birthday:</label>
+            <input id="date" #date  [ngClass]="{invalidInput :thisInputIsNotValidAndFormSubmitted('BirthDate')}" type="date" id="birthday" name="birthday" formControlName="BirthDate">
+        </div>
+        <div>
+            <small class="error-style" *ngIf="thisInputIsNotValidAndFormSubmitted('BirthDate')">
+                enter a valid date employee age can't be less than 18 years
+            </small>
+        </div>
+
+        <button (click)="whensubmit()" class=" btn btn-success" type="submit">submmit</button>
+    </div>
 </form>

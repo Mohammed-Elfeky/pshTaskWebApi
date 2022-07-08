@@ -106,7 +106,8 @@ namespace pshTaskWebApi.Controllers
                 Phone = e.Phone,
                 BirthDate = e.BirthDate,
                 Image = e.Image,
-                departmentName = e.department.Name
+                departmentName = e.department.Name,
+                dept_Id=e.dept_id
             };
         }
     }

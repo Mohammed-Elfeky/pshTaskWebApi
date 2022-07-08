@@ -1,0 +1,12 @@
+.invalidInput{
+    border-color: red;
+}
+
+.error-style{
+    color: red;
+}
+
+
+#date{
+    border: 1px solid gray !important;
+}

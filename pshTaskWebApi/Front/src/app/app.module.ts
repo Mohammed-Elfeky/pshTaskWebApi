@@ -11,7 +11,9 @@ import { ShowOneEmployeeComponent } from './components/show-one-employee/show-on
 import { NavComponent } from './components/nav/nav.component';
 import { EmployeesService } from './services/employees.service';
 import { HttpClientModule } from '@angular/common/http';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DepartmentsService } from './services/departments.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,10 +28,14 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
-    EmployeesService
+    EmployeesService,
+    DepartmentsService
   ],
   bootstrap: [AppComponent]
 })
