@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
 namespace pshTaskWebApi.Models
 {
-    public class context:DbContext
+    public class context: IdentityDbContext
     {
         public context(DbContextOptions options) : base(options) { }
 

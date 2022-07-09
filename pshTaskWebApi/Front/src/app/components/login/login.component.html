@@ -1,0 +1,33 @@
+<form [formGroup]="loginForm" (ngSubmit)="whensubmit()" class="w-25 mt-5 mx-auto">
+    <div class="container">
+
+        <!-- first name -->
+        <div class=" mb-3">
+            <input [ngClass]="{invalidInput :thisInputIsNotValidAndFormSubmitted('userName')}" type="text"
+                class="form-control" placeholder="First Name" aria-label="Username" aria-describedby="basic-addon1"
+                formControlName="userName">
+            <small class="error-style text-danger" *ngIf="thisInputIsNotValidAndFormSubmitted('userName')">
+                the name is required
+            </small>
+        </div>
+
+
+        <!-- pass Word -->
+        <div class=" mb-3 ">
+            <input [ngClass]="{invalidInput :thisInputIsNotValidAndFormSubmitted('password')}" type="password"
+                class="form-control" placeholder="password" aria-label="Username" aria-describedby="basic-addon1"
+                formControlName="password">
+            <small class="error-style text-danger" *ngIf="thisInputIsNotValidAndFormSubmitted('password')">
+                the password is required
+            </small>
+        </div>
+
+        <button class=" btn btn-success py-2 mb-2" type="submit">submmit</button>
+
+        <div class="text-center text-danger py-1">
+            <small class="error-style " *ngIf="signInServerError">
+                {{signInServerError}}
+            </small>
+        </div>
+    </div>
+</form>

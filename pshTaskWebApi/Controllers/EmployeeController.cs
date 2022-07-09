@@ -4,23 +4,29 @@ using pshTaskWebApi.Models;
 using pshTaskWebApi.Repos;
 using pshTaskWebApi.DTOS;
 using System.Linq;
+using Microsoft.AspNetCore.Authorization;
+
 namespace pshTaskWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EmployeeController : ControllerBase
     {
         private readonly IEmployeeRepo employeeRepo;
+        private readonly context context;
 
-        public EmployeeController( IEmployeeRepo employeeRepo )
+        public EmployeeController( IEmployeeRepo employeeRepo,context context )
         {
             this.employeeRepo = employeeRepo;
+            this.context = context;
         }
 
 
         [HttpGet]
         public IActionResult getAll()
         {
+            var q= context.employees.Skip(5).ToList();
             try
             {
                 var empolyees = employeeRepo.GetAll().Select(emp => converter(emp));

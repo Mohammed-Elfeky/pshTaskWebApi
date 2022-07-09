@@ -13,7 +13,7 @@ export interface Employee {
     lastName: string,
     phone: string,
     birthDate: Date,
-    Image: string,
+    image: string,
     departmentName: string,
     dept_Id:number
 }

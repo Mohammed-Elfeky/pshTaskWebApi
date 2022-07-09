@@ -1,2 +1,17 @@
-<p>show-one-employee works! {{empId}}</p>
 
+
+
+<div class="card mx-auto w-75 mt-5"  >
+    <img [src]="'http://localhost:60309/images/'+emp.image" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">Card title</h5>
+      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">name: {{emp.firstName}} {{emp.lastName}}</li>
+      <li class="list-group-item">phone: {{emp.phone}}</li>
+      <li class="list-group-item">birthDate: {{emp.birthDate.toString().substring(0,10)}}</li>
+      <li class="list-group-item">department: {{emp.departmentName}}</li>
+    </ul>
+
+  </div>

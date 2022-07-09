@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Employee } from 'src/app/models/Employee';
 import { EmployeesService } from 'src/app/services/employees.service';
 
 @Component({
@@ -10,16 +11,19 @@ import { EmployeesService } from 'src/app/services/employees.service';
 export class ShowOneEmployeeComponent implements OnInit {
 
   empId:number=0;
-
-  constructor(private route: ActivatedRoute,private empService:EmployeesService ) { console.log("ctor") }
+  emp!:Employee;
+  constructor(private route: ActivatedRoute,private empService:EmployeesService ) {  }
   
   ngOnInit(): void {
     console.log("ngOnInit")
     this.route.params.subscribe(params => {
       this.empId=params["id"];
 
-      this.empService.getEmployee(this.empId).subscribe(data=>{console.log(data)},
-      err=>{console.log(err.status)}
+      this.empService.getEmployee(this.empId).subscribe(
+        data=>{
+          this.emp=data;
+        },
+        err=>{console.log(err.status)}
       )
     });
   }

@@ -1,0 +1,16 @@
+#main{
+    box-shadow:rgba(0, 0, 0, 0.1) 0px 3px 20px 0px;
+    align-items: center;
+}
+
+.info-part {
+    font-size: medium;
+    display: flex;
+    justify-content: center;
+}
+
+
+.info-part > div{
+    background-color: gray;
+    padding: 20px 10px;
+}
